@@ -43,6 +43,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PentiaChatApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-PentiaChatApp-PentiaChatAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PentiaChatApp-PentiaChatAppTests.release.xcconfig"; path = "Target Support Files/Pods-PentiaChatApp-PentiaChatAppTests/Pods-PentiaChatApp-PentiaChatAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		A90C11382987100D00F7AADC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A961AA1D2988470E00A299DA /* PentiaChatApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PentiaChatApp.entitlements; path = PentiaChatApp/PentiaChatApp.entitlements; sourceTree = "<group>"; };
 		C9AFFFCDD110D0D214D3CED9 /* Pods_PentiaChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PentiaChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1CA2A6A8E510C45E058FC6F /* Pods_PentiaChatApp_PentiaChatAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PentiaChatApp_PentiaChatAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -88,6 +89,7 @@
 		13B07FAE1A68108700A75B9A /* PentiaChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				A961AA1D2988470E00A299DA /* PentiaChatApp.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -503,6 +505,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PentiaChatApp/PentiaChatApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PentiaChatApp/Info.plist;
@@ -530,6 +533,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PentiaChatApp/PentiaChatApp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = PentiaChatApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

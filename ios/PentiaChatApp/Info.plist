@@ -28,9 +28,21 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.304577767134-i9qkutah24ne2t77pc64o88vpt19bp3j</string>
+				<string>fb1316752752478631</string>
 			</array>
 		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>1316752752478631</string>
+	<key>FacebookClientToken</key>
+	<string>dba6f95317d24d8ed114cea4bd5d557e</string>
+	<key>FacebookDisplayName</key>
+	<string>PentiaChatApp</string>
+	<key>LSApplicationQueriesSchemes</key>
+		<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>

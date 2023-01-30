@@ -1,24 +1,30 @@
-#import <Firebase.h>
 
 #import "AppDelegate.h"
 
-#import <RNGoogleSignin/RNGoogleSignin.h>
 #import <React/RCTBundleURLProvider.h>
+
+#import <Firebase.h>
+
+#import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
+#import <RNGoogleSignin/RNGoogleSignin.h>
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [FIRApp configure];
-  // [[FBSDKApplicationDelegate sharedInstance] application:application
-  //                      didFinishLaunchingWithOptions:launchOptions];
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                       didFinishLaunchingWithOptions:launchOptions];
+
 
   self.moduleName = @"PentiaChatApp";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
+  [super application:application didFinishLaunchingWithOptions:launchOptions];
 
-  return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  return YES;
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
@@ -40,4 +46,18 @@
   return true;
 }
 
+// facebook only
+// - (BOOL)application:(UIApplication *)app
+//             openURL:(NSURL *)url
+//             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+// {
+//   return [[FBSDKApplicationDelegate sharedInstance]application:app
+//                                                       openURL:url
+//                                                       options:options];
+// }
+
+// combined facebook and google login 
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options] || [RNGoogleSignin application:application openURL:url options:options];
+}
 @end
