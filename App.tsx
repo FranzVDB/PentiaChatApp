@@ -1,9 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import React, {useContext} from 'react';
 
@@ -15,6 +11,7 @@ import {
 } from './src/state/auth-context';
 import {AuthedShell} from './src/views/authed-shell';
 import {UnAuthShell} from './src/views/un-authed-shell';
+import {NavigationContainer} from '@react-navigation/native';
 
 GoogleSignin.configure();
 
@@ -29,11 +26,17 @@ function Shell() {
 function App(): JSX.Element {
   const {user} = useContext<UserContextType>(UserContext);
 
-  if (!user) {
-    return <UnAuthShell />;
-  }
-
-  return <AuthedShell />;
+  return (
+    <GestureHandlerRootView style={{flex: 1}}>
+      {user ? (
+        <NavigationContainer>
+          <AuthedShell />
+        </NavigationContainer>
+      ) : (
+        <UnAuthShell />
+      )}
+    </GestureHandlerRootView>
+  );
 }
 
 export default Shell;

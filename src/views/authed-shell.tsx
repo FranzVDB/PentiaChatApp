@@ -1,20 +1,20 @@
-import {useContext} from 'react';
-import {Button, Text} from 'react-native';
-import {PCContainer} from '../components/container';
-import {UserContext} from '../state/auth-context';
+import React from 'react';
+import {ChatRoomsScreen} from './chat-rooms';
+import {createStackNavigator} from '@react-navigation/stack';
+import {ChatRoomScreen} from './chat-room';
+
+export type RootStackParamList = {
+  ChatRooms: undefined;
+  Chat: {roomId: string} | undefined;
+};
 
 export const AuthedShell = () => {
-  const {logout} = useContext(UserContext);
+  const RootStack = createStackNavigator<RootStackParamList>();
+
   return (
-    <PCContainer>
-      <Text>Welcome to Pentia Chat APP</Text>
-      <Text>Join a Room to start chatting</Text>
-      <Button
-        title="Sign out"
-        onPress={async () => {
-          await logout();
-        }}
-      />
-    </PCContainer>
+    <RootStack.Navigator initialRouteName="ChatRooms">
+      <RootStack.Screen name="ChatRooms" component={ChatRoomsScreen} />
+      <RootStack.Screen name="Chat" component={ChatRoomScreen} />
+    </RootStack.Navigator>
   );
 };
