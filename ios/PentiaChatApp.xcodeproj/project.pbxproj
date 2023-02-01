@@ -14,6 +14,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A0A0EB5CC8A8C2B37FA466C9 /* Pods_PentiaChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9AFFFCDD110D0D214D3CED9 /* Pods_PentiaChatApp.framework */; };
 		A90C11392987100E00F7AADC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A90C11382987100D00F7AADC /* GoogleService-Info.plist */; };
+		A9F2AECE298AF50C00B70FAD /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9F2AECD298AF50C00B70FAD /* MaterialIcons.ttf */; };
 		DF14F6CFA0E74420AE119956 /* Pods_PentiaChatApp_PentiaChatAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CA2A6A8E510C45E058FC6F /* Pods_PentiaChatApp_PentiaChatAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = PentiaChatApp;
+		};
+		A9F2AEA4298AEB5C00B70FAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9F2AE9F298AEB5C00B70FAD /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
+			remoteInfo = RNVectorIcons;
+		};
+		A9F2AEA6298AEB5C00B70FAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9F2AE9F298AEB5C00B70FAD /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A39873CE1EA65EE60051E01A;
+			remoteInfo = "RNVectorIcons-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -44,6 +59,8 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-PentiaChatApp-PentiaChatAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PentiaChatApp-PentiaChatAppTests.release.xcconfig"; path = "Target Support Files/Pods-PentiaChatApp-PentiaChatAppTests/Pods-PentiaChatApp-PentiaChatAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		A90C11382987100D00F7AADC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A961AA1D2988470E00A299DA /* PentiaChatApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PentiaChatApp.entitlements; path = PentiaChatApp/PentiaChatApp.entitlements; sourceTree = "<group>"; };
+		A9F2AE9F298AEB5C00B70FAD /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		A9F2AECD298AF50C00B70FAD /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		C9AFFFCDD110D0D214D3CED9 /* Pods_PentiaChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PentiaChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1CA2A6A8E510C45E058FC6F /* Pods_PentiaChatApp_PentiaChatAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PentiaChatApp_PentiaChatAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -113,6 +130,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A9F2AE9F298AEB5C00B70FAD /* RNVectorIcons.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -120,6 +138,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A9F2AECD298AF50C00B70FAD /* MaterialIcons.ttf */,
 				A90C11382987100D00F7AADC /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* PentiaChatApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -127,6 +146,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				A04458B55A29412DAAB9D413 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -138,6 +158,22 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* PentiaChatApp.app */,
 				00E356EE1AD99517003FC87E /* PentiaChatAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A04458B55A29412DAAB9D413 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A9F2AEA0298AEB5C00B70FAD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9F2AEA5298AEB5C00B70FAD /* libRNVectorIcons.a */,
+				A9F2AEA7298AEB5C00B70FAD /* libRNVectorIcons-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,6 +264,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A9F2AEA0298AEB5C00B70FAD /* Products */;
+					ProjectRef = A9F2AE9F298AEB5C00B70FAD /* RNVectorIcons.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* PentiaChatApp */,
@@ -235,6 +277,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A9F2AEA5298AEB5C00B70FAD /* libRNVectorIcons.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVectorIcons.a;
+			remoteRef = A9F2AEA4298AEB5C00B70FAD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A9F2AEA7298AEB5C00B70FAD /* libRNVectorIcons-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNVectorIcons-tvOS.a";
+			remoteRef = A9F2AEA6298AEB5C00B70FAD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
@@ -248,6 +307,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9F2AECE298AF50C00B70FAD /* MaterialIcons.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				A90C11392987100E00F7AADC /* GoogleService-Info.plist in Resources */,

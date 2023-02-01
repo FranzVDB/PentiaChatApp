@@ -5,12 +5,10 @@ import {ChatRoom, Message} from './useChatRoomsHook';
 export const useChatsHook = (roomId: string) => {
   const [chatRoom, setChatRoom] = useState<ChatRoom | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [limit, setLimit] = useState(50);
   const roomsRef = firestore().collection<ChatRoom>('ChatRooms');
-  const messagesRef = firestore().collection('Messages');
 
   useEffect(() => {
-    console.log('useChatsHook get chat room');
-
     const data = roomsRef.doc(roomId).get();
 
     data.then(res => {
@@ -19,67 +17,59 @@ export const useChatsHook = (roomId: string) => {
         return;
       }
 
-      const {decsription, icon, name} = room;
-      setChatRoom({decsription, icon, name, id: res.id});
+      const {description, icon, name} = room;
+      setChatRoom({description, icon, name, id: res.id});
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
   useEffect(() => {
     if (!roomId) {
-      console.log('useChatsHook get messages NO room id');
       return;
     }
 
-    console.log('useChatsHook get messages');
-
-    messagesRef
+    roomsRef
       .doc(roomId)
       .collection('messages')
-      .orderBy('sent')
+      .orderBy('sent', 'desc')
+      .limit(limit)
       .onSnapshot(querySnapshot => {
-        const allMessages: Message[] = [];
-        if (querySnapshot.empty) {
-          return;
-        }
-
+        const messagesTmp: Message[] = [];
         querySnapshot.forEach(doc => {
-          const tmp = doc.data();
-          if (!tmp) {
-            return;
-          }
-          allMessages.push({
+          const {message, sent, from} = doc.data();
+          messagesTmp.push({
+            message,
+            sent,
+            from,
             id: doc.id,
-            message: tmp.message,
-            sent: tmp.sent,
-            from: tmp.from,
           });
         });
-        setMessages(allMessages);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [roomId]);
 
-  const sendMessage = async (newMessage: string) => {
-    console.log(newMessage);
-    if (newMessage.trim()) {
+        messagesTmp.reverse();
+        setMessages(messagesTmp);
+      });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roomId, limit]);
+
+  const sendMessage = async (meg: string, from: string) => {
+    if (meg.trim()) {
       const message = {
-        message: newMessage,
+        message: meg,
         sent: new Date(),
-        from: 'this.user.uid',
+        from: from,
       };
-      await messagesRef
+
+      await roomsRef
         .doc(roomId)
         .collection('messages')
         .add(message)
-        .then(() => {
-          console.log('added message!');
-        })
+        .then(() => {})
         .catch(err => {
           console.log(err);
         });
     }
   };
 
-  return {chatRoom, sendMessage, messages};
+  return {chatRoom, sendMessage, messages, setLimit};
 };
