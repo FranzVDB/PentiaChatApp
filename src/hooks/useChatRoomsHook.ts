@@ -5,6 +5,7 @@ export type Message = {
   message: string;
   sent: Date;
   from: string;
+  avatarUrl: string;
   id: string;
 };
 

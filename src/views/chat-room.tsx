@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   View,
   FlatList,
+  Image,
 } from 'react-native';
 import React, {useContext, useEffect, useRef} from 'react';
 import {useChatsHook} from '../hooks/useChatsHook';
@@ -47,7 +48,13 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
               : [styles.messageContainer, {alignItems: 'flex-end'}]
           }>
           <Text style={styles.sender}>{item.from}</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View
+            style={
+              status
+                ? {flexDirection: 'row', alignItems: 'center', gap: 10}
+                : {flexDirection: 'row-reverse', alignItems: 'center', gap: 10}
+            }>
+            <Image source={{uri: item.avatarUrl}} style={styles.avatar} />
             <View
               style={
                 status
@@ -111,7 +118,7 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
         style={styles.newInput}
         value={newMessage}
         onSubmitEditing={() => {
-          sendMessage(newMessage, user?.displayName ?? 'unknown');
+          sendMessage(newMessage, user);
           setNewMessage('');
         }}
         placeholder="Message..."
@@ -125,6 +132,11 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  avatar: {
+    borderRadius: 25,
+    width: 40,
+    height: 40,
   },
   list: {
     flex1: 1,
@@ -167,5 +179,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#3e5869',
     marginBottom: 6,
+    paddingHorizontal: 5,
   },
 });

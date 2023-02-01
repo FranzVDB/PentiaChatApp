@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {ChatRoom, Message} from './useChatRoomsHook';
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
 export const useChatsHook = (roomId: string) => {
   const [chatRoom, setChatRoom] = useState<ChatRoom | null>(null);
@@ -36,11 +37,12 @@ export const useChatsHook = (roomId: string) => {
       .onSnapshot(querySnapshot => {
         const messagesTmp: Message[] = [];
         querySnapshot.forEach(doc => {
-          const {message, sent, from} = doc.data();
+          const {message, sent, from, avatarUrl} = doc.data();
           messagesTmp.push({
             message,
             sent,
             from,
+            avatarUrl,
             id: doc.id,
           });
         });
@@ -52,12 +54,15 @@ export const useChatsHook = (roomId: string) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId, limit]);
 
-  const sendMessage = async (meg: string, from: string) => {
+  const sendMessage = async (meg: string, user: FirebaseAuthTypes.User) => {
     if (meg.trim()) {
       const message = {
         message: meg,
         sent: new Date(),
-        from: from,
+        from: user.displayName,
+        avatarUrl:
+          user.photoURL ??
+          'https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg',
       };
 
       await roomsRef
