@@ -7,6 +7,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit-swift.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
+#import "RNSplashScreen.h"
 
 
 @implementation AppDelegate
@@ -23,6 +24,8 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
   [super application:application didFinishLaunchingWithOptions:launchOptions];
+
+  [RNSplashScreen show];
 
   return YES;
 }

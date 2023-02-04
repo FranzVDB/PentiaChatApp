@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {
@@ -12,10 +12,15 @@ import {
 import {AuthedShell} from './src/views/authed-shell';
 import {UnAuthShell} from './src/views/un-authed-shell';
 import {NavigationContainer} from '@react-navigation/native';
+import SplashScreen from 'react-native-splash-screen';
 
 GoogleSignin.configure();
 
 function Shell() {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <UserContextProvider>
       <App />
