@@ -2,6 +2,7 @@ import React from 'react';
 import {ChatRoomsScreen} from './chat-rooms';
 import {createStackNavigator} from '@react-navigation/stack';
 import {ChatRoomScreen} from './chat-room';
+import {PCALogoutButton} from '../components/auth-buttons/logout';
 
 export type RootStackParamList = {
   ChatRooms: undefined;
@@ -13,7 +14,13 @@ export const AuthedShell = () => {
 
   return (
     <RootStack.Navigator initialRouteName="ChatRooms">
-      <RootStack.Screen name="ChatRooms" component={ChatRoomsScreen} />
+      <RootStack.Screen
+        name="ChatRooms"
+        component={ChatRoomsScreen}
+        options={{
+          headerRight: () => <PCALogoutButton />,
+        }}
+      />
       <RootStack.Screen name="Chat" component={ChatRoomScreen} />
     </RootStack.Navigator>
   );

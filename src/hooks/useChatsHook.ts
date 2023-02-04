@@ -6,10 +6,13 @@ import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 export const useChatsHook = (roomId: string) => {
   const [chatRoom, setChatRoom] = useState<ChatRoom | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [limit, setLimit] = useState(50);
+  const [loading, setLoading] = useState(false);
+
+  const [limit, setLimit] = useState(4);
   const roomsRef = firestore().collection<ChatRoom>('ChatRooms');
 
   useEffect(() => {
+    setLoading(true);
     const data = roomsRef.doc(roomId).get();
 
     data.then(res => {
@@ -20,6 +23,7 @@ export const useChatsHook = (roomId: string) => {
 
       const {description, icon, name} = room;
       setChatRoom({description, icon, name, id: res.id});
+      setLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
@@ -28,8 +32,9 @@ export const useChatsHook = (roomId: string) => {
     if (!roomId) {
       return;
     }
+    setLoading(true);
 
-    roomsRef
+    return roomsRef
       .doc(roomId)
       .collection('messages')
       .orderBy('sent', 'desc')
@@ -47,8 +52,9 @@ export const useChatsHook = (roomId: string) => {
           });
         });
 
-        messagesTmp.reverse();
+        // messagesTmp.reverse();
         setMessages(messagesTmp);
+        setLoading(false);
       });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,5 +82,5 @@ export const useChatsHook = (roomId: string) => {
     }
   };
 
-  return {chatRoom, sendMessage, messages, setLimit};
+  return {chatRoom, sendMessage, messages, setLimit, loading};
 };

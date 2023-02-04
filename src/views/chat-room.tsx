@@ -24,7 +24,7 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
   const flatlistRef = useRef<FlatList | null>(null);
 
   const [newMessage, setNewMessage] = React.useState('');
-  const {messages, chatRoom, sendMessage, setLimit} = useChatsHook(
+  const {messages, chatRoom, sendMessage, setLimit, loading} = useChatsHook(
     route.params?.roomId ?? '',
   );
 
@@ -91,6 +91,11 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
+      {loading && (
+        <View style={styles.loading}>
+          <Text style={styles.loadingText}>Loading...</Text>
+        </View>
+      )}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <FlatList
           data={
@@ -102,16 +107,22 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
           renderItem={({item}) => renderItem(item)}
           style={styles.list}
           ref={flatlistRef}
-          onRefresh={() => {
-            setLimit(prev => prev + 50);
+          // initialScrollIndex={messages.length - 1}
+          inverted
+          onEndReachedThreshold={0.1}
+          onEndReached={() => {
+            setLimit(prev => prev + 2);
           }}
-          refreshing={false}
-          onContentSizeChange={() => {
-            if (!flatlistRef.current) {
-              return;
-            }
-            flatlistRef.current.scrollToEnd({animated: true});
-          }}
+          // onRefresh={() => {
+          //   setLimit(prev => prev + 50);
+          // }}
+          // refreshing={false}
+          // onContentSizeChange={() => {
+          //   if (!flatlistRef.current) {
+          //     return;
+          //   }
+          //   flatlistRef.current.scrollToEnd({animated: true});
+          // }}
         />
       </TouchableWithoutFeedback>
       <TextInput
@@ -177,6 +188,18 @@ const styles = StyleSheet.create({
   },
   sender: {
     fontSize: 12,
+    color: '#3e5869',
+    marginBottom: 6,
+    paddingHorizontal: 5,
+  },
+  loading: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 10,
+  },
+  loadingText: {
+    fontSize: 16,
     color: '#3e5869',
     marginBottom: 6,
     paddingHorizontal: 5,
