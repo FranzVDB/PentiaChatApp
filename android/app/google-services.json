@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "304577767134",
+    "project_id": "chatapppentia",
+    "storage_bucket": "chatapppentia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304577767134:android:aa993538e27c0bc3c3844f",
+        "android_client_info": {
+          "package_name": "com.pentiachatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304577767134-r31boebkolc8tbsopb3n1n9rtkd8j2gb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pentiachatapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "304577767134-ogdfsjijeurmkuvsr9if9m5ei5u085ok.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUnkSsuqOrq-1WLLg0xJifzBdImSEl2H4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304577767134-mkoiah3ioqop9psprugi4u1e7475lsfb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "304577767134-i9qkutah24ne2t77pc64o88vpt19bp3j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.PentiaChatApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

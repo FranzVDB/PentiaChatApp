@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">PentiaChatApp</string>
+    <string name="facebook_app_id">1316752752478631</string>
+    <string name="facebook_client_token">dba6f95317d24d8ed114cea4bd5d557e</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
 </resources>
