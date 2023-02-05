@@ -5,7 +5,7 @@ import {PCAGoogleSigninButton} from '../components/auth-buttons/google-login';
 
 export const UnAuthShell = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: '#271a2d'}}>
       <View style={styles.container}>
         <View>
           <Text style={styles.header}>Welcome!</Text>
@@ -14,7 +14,7 @@ export const UnAuthShell = () => {
         <View style={styles.options}>
           <Text style={styles.text}> Sign in using</Text>
           <PCAFacebookLogin />
-          <Text>or</Text>
+          <Text style={styles.text}>or</Text>
           <PCAGoogleSigninButton />
         </View>
       </View>
@@ -28,13 +28,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     gap: 10,
+    backgroundColor: '#271a2d',
   },
   header: {
     fontSize: 40,
     fontWeight: 'bold',
+    color: 'white',
   },
   subHeader: {
     fontSize: 20,
+    color: 'white',
   },
   options: {
     justifyContent: 'center',
@@ -43,5 +46,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+    color: 'white',
   },
 });

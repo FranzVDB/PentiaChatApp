@@ -5,16 +5,10 @@ import React from 'react';
 
 export type UserContextType = {
   user: FirebaseAuthTypes.User | null;
-  logout: () => Promise<void>;
-};
-
-const logout = async () => {
-  await auth().signOut();
 };
 
 export const UserContext = createContext<UserContextType>({
   user: null,
-  logout,
 });
 
 export const UserContextProvider: FC<PropsWithChildren> = ({children}) => {
@@ -29,9 +23,5 @@ export const UserContextProvider: FC<PropsWithChildren> = ({children}) => {
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  return (
-    <UserContext.Provider value={{user, logout}}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{user}}>{children}</UserContext.Provider>;
 };

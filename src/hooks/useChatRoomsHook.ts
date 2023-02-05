@@ -1,21 +1,6 @@
 import {useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
-
-export type MessageType = {
-  message: string;
-  sent: Date;
-  from: string;
-  avatarUrl: string;
-  id: string;
-};
-
-export type ChatRoomType = {
-  name: string;
-  description: string;
-  iconUrl: string;
-  id: string;
-  lastUpdated: Date;
-};
+import {ChatRoomType} from '../types/ChatRoomType';
 
 export const useChatRoomsHook = () => {
   const [chatRooms, setChatRooms] = useState<ChatRoomType[]>([]);

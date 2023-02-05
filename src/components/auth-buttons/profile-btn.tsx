@@ -7,7 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../views/authed-shell';
 
-export const PCALogoutButton = () => {
+export const ProfileButton = () => {
   const {user} = useContext<UserContextType>(UserContext);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 

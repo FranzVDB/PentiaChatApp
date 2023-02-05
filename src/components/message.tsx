@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Image, Platform, StyleSheet} from 'react-native';
-import {MessageType} from './../hooks/useChatRoomsHook';
+import {MessageType} from '../types/MessageType';
 
 type Props = {
   isMe: boolean;
@@ -62,12 +62,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-
-  messageUser: {
-    fontSize: 16,
-    color: '#3e5869',
-    marginBottom: 6,
-  },
   messageContainer: {
     width: '100%',
     alignItems: 'flex-start',
@@ -96,11 +90,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     paddingVertical: 10,
-  },
-  loadingText: {
-    fontSize: 16,
-    color: '#3e5869',
-    marginBottom: 6,
-    paddingHorizontal: 5,
   },
 });

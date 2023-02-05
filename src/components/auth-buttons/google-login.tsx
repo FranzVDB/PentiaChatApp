@@ -21,9 +21,7 @@ export const PCAGoogleSigninButton = () => {
     <TouchableOpacity
       style={[styles.card, styles.shadowProp]}
       onPress={() =>
-        onGoogleButtonPress().then(() =>
-          console.log('Signed in with Facebook!'),
-        )
+        onGoogleButtonPress().then(() => console.log('Signed in with Google!'))
       }>
       <Image
         style={styles.img}
@@ -44,7 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
-    backgroundColor: 'white',
+    backgroundColor: '#32273c',
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 25,
@@ -59,5 +57,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+    color: 'white',
   },
 });

@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {ChatRoomType, MessageType} from './useChatRoomsHook';
 import {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {ChatRoomType} from '../types/ChatRoomType';
+import {MessageType} from '../types/MessageType';
 
 export const useChatsHook = (roomId: string) => {
   const [chatRoom, setChatRoom] = useState<ChatRoomType | null>(null);

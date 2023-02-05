@@ -7,10 +7,11 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {ChatRoomType, useChatRoomsHook} from '../hooks/useChatRoomsHook';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from './authed-shell';
 import {MaterialIcon} from '../components/material-icon';
+import {useChatRoomsHook} from '../hooks/useChatRoomsHook';
+import {ChatRoomType} from '../types/ChatRoomType';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ChatRooms'>;
 

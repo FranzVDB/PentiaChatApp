@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
-    backgroundColor: 'white',
+    backgroundColor: '#32273c',
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 25,
@@ -75,5 +75,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+    color: 'white',
   },
 });
