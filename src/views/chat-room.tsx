@@ -3,19 +3,21 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  Text,
   TextInput,
   TouchableWithoutFeedback,
   View,
   FlatList,
-  Image,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useContext, useEffect, useRef} from 'react';
 import {useChatsHook} from '../hooks/useChatsHook';
 import {RootStackParamList} from './authed-shell';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {Message} from '../hooks/useChatRoomsHook';
+import {MessageType} from '../hooks/useChatRoomsHook';
 import {UserContextType, UserContext} from '../state/auth-context';
+import {Message} from '../components/message';
+import {MaterialIcon} from '../components/material-icon';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Chat'>;
 
@@ -34,66 +36,31 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
   }, [chatRoom]);
 
   if (!chatRoom || !messages || !user) {
-    return <Text>Loading...</Text>;
-  }
-
-  const renderItem = (item: Message) => {
-    const status = item.from !== user.displayName;
     return (
-      <View>
-        <View
-          style={
-            status
-              ? styles.messageContainer
-              : [styles.messageContainer, {alignItems: 'flex-end'}]
-          }>
-          <Text style={styles.sender}>{item.from}</Text>
-          <View
-            style={
-              status
-                ? {flexDirection: 'row', alignItems: 'center', gap: 10}
-                : {flexDirection: 'row-reverse', alignItems: 'center', gap: 10}
-            }>
-            <Image source={{uri: item.avatarUrl}} style={styles.avatar} />
-            <View
-              style={
-                status
-                  ? styles.message
-                  : [
-                      styles.message,
-                      {
-                        backgroundColor:
-                          Platform.OS === 'ios' ? '#1982FC' : '#43CC47',
-                      },
-                    ]
-              }>
-              <Text
-                style={
-                  status
-                    ? styles.messageText
-                    : [
-                        styles.messageText,
-                        {
-                          color: 'white',
-                        },
-                      ]
-                }>
-                {item.message}
-              </Text>
-            </View>
-          </View>
-        </View>
+      <View style={styles.loading}>
+        <ActivityIndicator color="white" />
       </View>
     );
+  }
+
+  const onSendMessageHandler = () => {
+    sendMessage(newMessage, user);
+    setNewMessage('');
+  };
+
+  const renderItem = (item: MessageType) => {
+    const isMe = item.from !== user.displayName;
+    return <Message message={item} isMe={isMe} />;
   };
 
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={70}
       style={styles.container}>
       {loading && (
         <View style={styles.loading}>
-          <Text style={styles.loadingText}>Loading...</Text>
+          <ActivityIndicator />
         </View>
       )}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -107,35 +74,33 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
           renderItem={({item}) => renderItem(item)}
           style={styles.list}
           ref={flatlistRef}
-          // initialScrollIndex={messages.length - 1}
           inverted
           onEndReachedThreshold={0.1}
           onEndReached={() => {
-            setLimit(prev => prev + 2);
+            setLimit(prev => prev + 50);
           }}
-          // onRefresh={() => {
-          //   setLimit(prev => prev + 50);
-          // }}
-          // refreshing={false}
-          // onContentSizeChange={() => {
-          //   if (!flatlistRef.current) {
-          //     return;
-          //   }
-          //   flatlistRef.current.scrollToEnd({animated: true});
-          // }}
         />
       </TouchableWithoutFeedback>
-      <TextInput
-        style={styles.newInput}
-        value={newMessage}
-        onSubmitEditing={() => {
-          sendMessage(newMessage, user);
-          setNewMessage('');
-        }}
-        placeholder="Message..."
-        returnKeyType="send"
-        onChangeText={setNewMessage}
-      />
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          value={newMessage}
+          onSubmitEditing={() => {
+            onSendMessageHandler();
+          }}
+          placeholder="Message..."
+          returnKeyType="send"
+          onChangeText={setNewMessage}
+          placeholderTextColor={'white'}
+        />
+        <TouchableOpacity
+          style={styles.inputAction}
+          onPress={() => {
+            onSendMessageHandler();
+          }}>
+          <MaterialIcon size="large" color="white" name="send" />
+        </TouchableOpacity>
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -143,6 +108,7 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#271a2d',
   },
   avatar: {
     borderRadius: 25,
@@ -154,49 +120,39 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
   },
-  newInput: {
+  inputContainer: {
+    backgroundColor: '#32273c',
+    flexDirection: 'row',
+    alignSelf: 'center',
+    width: '90%',
     borderWidth: 1,
+    borderRadius: 20,
     borderColor: '#ccc',
-    fontSize: 16,
-    padding: 10,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     marginBottom: 30,
     height: 50,
   },
-
-  messageUser: {
+  input: {
+    flex: 8,
     fontSize: 16,
-    color: '#3e5869',
-    marginBottom: 6,
+    padding: 10,
+    color: 'white',
   },
-  messageContainer: {
-    width: '100%',
-    alignItems: 'flex-start',
-    marginBottom: 15,
-  },
-  message: {
-    maxWidth: '60%',
-    backgroundColor: 'lightgray',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 10,
-    marginBottom: 2,
-  },
-  messageText: {
-    color: 'black',
-    fontSize: 16,
-  },
-  sender: {
-    fontSize: 12,
-    color: '#3e5869',
-    marginBottom: 6,
-    paddingHorizontal: 5,
-  },
-  loading: {
+  inputAction: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+  loading: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: '#271a2d',
   },
   loadingText: {
     fontSize: 16,

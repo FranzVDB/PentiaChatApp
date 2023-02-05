@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
 
-export type Message = {
+export type MessageType = {
   message: string;
   sent: Date;
   from: string;
@@ -9,32 +9,35 @@ export type Message = {
   id: string;
 };
 
-export type ChatRoom = {
+export type ChatRoomType = {
   name: string;
   description: string;
-  icon: string;
+  iconUrl: string;
   id: string;
-  // messages: Message[];
+  lastUpdated: Date;
 };
 
 export const useChatRoomsHook = () => {
-  const [chatRooms, setChatRooms] = useState<ChatRoom[]>([]);
+  const [chatRooms, setChatRooms] = useState<ChatRoomType[]>([]);
   const [shouldFetchAgain, setShouldFetchAgain] = useState(false);
   const [loading, setLoading] = useState(false);
-  const ref = firestore().collection<ChatRoom>('ChatRooms');
+  const ref = firestore()
+    .collection<ChatRoomType>('ChatRooms')
+    .orderBy('lastUpdated', 'desc');
 
   useEffect(() => {
     setLoading(true);
     ref.get().then(res => {
-      const rooms: ChatRoom[] = [];
+      const rooms: ChatRoomType[] = [];
       res.forEach(doc => {
-        const {description, icon, name} = doc.data();
+        const {description, iconUrl, name, lastUpdated} = doc.data();
+
         rooms.push({
           id: doc.id,
           description,
-          icon,
+          iconUrl,
           name,
-          // messages,
+          lastUpdated,
         });
       });
       setChatRooms(rooms);

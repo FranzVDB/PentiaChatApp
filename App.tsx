@@ -13,6 +13,7 @@ import {AuthedShell} from './src/views/authed-shell';
 import {UnAuthShell} from './src/views/un-authed-shell';
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
+import {StatusBar} from 'react-native';
 
 GoogleSignin.configure();
 
@@ -33,6 +34,7 @@ function App(): JSX.Element {
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
+      <StatusBar barStyle="light-content" />
       {user ? (
         <NavigationContainer>
           <AuthedShell />
