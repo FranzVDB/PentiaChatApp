@@ -1,4 +1,6 @@
-# PentiaChatApp
+# PentiaChatApp IOS
+
+Missing notification due to apple developer account.
 
 ![alt text](https://i.postimg.cc/0yJDf0fg/Simulator-Screen-Shot-i-Phone-14-2023-02-05-at-21-23-11.png)
 
