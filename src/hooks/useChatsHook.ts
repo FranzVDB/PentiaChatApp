@@ -43,11 +43,12 @@ export const useChatsHook = (roomId: string) => {
       .onSnapshot(querySnapshot => {
         const messagesTmp: MessageType[] = [];
         querySnapshot.forEach(doc => {
-          const {message, sent, from, avatarUrl} = doc.data();
+          const {message, sent, from, type, avatarUrl} = doc.data();
           messagesTmp.push({
             message,
             sent,
             from,
+            type,
             avatarUrl,
             id: doc.id,
           });
@@ -61,11 +62,16 @@ export const useChatsHook = (roomId: string) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId, limit]);
 
-  const sendMessage = async (meg: string, user: FirebaseAuthTypes.User) => {
+  const sendMessage = async (
+    meg: string,
+    type: string,
+    user: FirebaseAuthTypes.User,
+  ) => {
     if (meg.trim()) {
       const message = {
         message: meg,
         sent: new Date(),
+        type,
         from: user.displayName,
         avatarUrl:
           user.photoURL ??

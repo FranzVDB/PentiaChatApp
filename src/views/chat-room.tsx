@@ -13,11 +13,15 @@ import React, {useContext, useEffect, useRef} from 'react';
 import {useChatsHook} from '../hooks/useChatsHook';
 import {RootStackParamList} from './authed-shell';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {MessageType} from '../hooks/useChatRoomsHook';
+
 import {UserContextType, UserContext} from '../state/auth-context';
 import {Message} from '../components/message';
 import {MaterialIcon} from '../components/material-icon';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ImagePicker} from '../components/image-picker';
+import {MessageType} from '../types/MessageType';
+import {ImageMessage} from '../components/image-message';
+import {CameraImage} from '../components/camera-image';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Chat'>;
 
@@ -44,13 +48,17 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
   }
 
   const onSendMessageHandler = () => {
-    sendMessage(newMessage, user);
+    sendMessage(newMessage, 'message', user);
     setNewMessage('');
   };
 
   const renderItem = (item: MessageType) => {
     const isMe = item.from !== user.displayName;
-    return <Message message={item} isMe={isMe} />;
+    return item.type === 'message' ? (
+      <Message message={item} isMe={isMe} />
+    ) : (
+      <ImageMessage message={item} isMe={isMe} />
+    );
   };
 
   return (
@@ -93,6 +101,9 @@ export const ChatRoomScreen = ({route, navigation}: Props) => {
           onChangeText={setNewMessage}
           placeholderTextColor={'white'}
         />
+        <ImagePicker roomId={route.params?.roomId ?? ''} />
+        <CameraImage roomId={route.params?.roomId ?? ''} />
+
         <TouchableOpacity
           style={styles.inputAction}
           onPress={() => {
