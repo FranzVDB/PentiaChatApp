@@ -36,19 +36,6 @@ export const ImageMessage = ({message, isMe}: Props) => {
                     },
                   ]
             }>
-            {/* <Text
-              style={
-                isMe
-                  ? styles.messageText
-                  : [
-                      styles.messageText,
-                      {
-                        color: 'white',
-                      },
-                    ]
-              }>
-              {message.message}
-            </Text> */}
             <Image source={{uri: message.message}} style={styles.image} />
           </View>
         </View>
