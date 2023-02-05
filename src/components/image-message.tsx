@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 6,
     paddingHorizontal: 5,
-    paddingRight: 55,
+    paddingRight: 10,
   },
   loading: {
     justifyContent: 'center',
