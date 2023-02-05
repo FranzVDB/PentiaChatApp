@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     width: 40,
     height: 40,
+    alignSelf: 'flex-end',
   },
   messageContainer: {
     width: '100%',
